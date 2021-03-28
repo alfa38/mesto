@@ -18,7 +18,10 @@
         <section class="profile">
             <img class="profile__avatar" src="images/kusto.jpg" alt="Ваш аватар">
           <div class="profile__data-container">
-            <h1 class="profile__name">Жак-Ив Кусто<button class="profile__button profile__button_edit"></h1>
+            <div class="profile__name-container">
+              <h1 class="profile__name">Жак-Ив Кусто</h1>
+              <button class="profile__button profile__button_edit" value='profile_edit'>
+            </div>
             <h2 class="profile__profession">Исследователь океана</h2>
           </div>
           <button class="profile__button profile__button_add"></button>
@@ -85,15 +88,27 @@
             </div>
           </div>
           <!-- card-item end -->
-
-          
-          
         </section>
+        <!-- modal section start-->
       </main>
       <footer class="footer">
-        
+        @ 2021 Mesto Russia
       </footer>
     </div>
+    <div class='modal-overlay'>
+      <div class='modal-overlay__content'>
+        <!-- modal content start-->
+        <button class='modal-overlay__button modal-overlay__button_close-modal' type='submit'></button>
+        <section class="edit-form">
+          <h2 class='edit-form__header'>Редактировать профиль</h2>
+          <input class='edit-form__input edit-form__input_name' type='text' placeholder="Введите Ваше Имя">
+          <input class='edit-form__input edit-form__input_profession' type='text' placeholder="Укажите род вашей деятельности">
+          <button class='edit-form__button edit-form__button_save' type='submit'>Сохранить</button>
+        </section>
+        <!-- modal content end -->
+      </div>
+    </div>
   </body>
+  <!-- <script src='scripts/script.js'></script> -->
   <script src='scripts/script.js'></script>
 </html>

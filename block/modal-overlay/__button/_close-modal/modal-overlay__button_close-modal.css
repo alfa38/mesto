@@ -1,0 +1,13 @@
+.modal-overlay__button_close-modal {
+    position: relative;
+    right: -58px;
+    width: 58px;
+    height: 58px;
+    margin: 0 0 0 auto;
+    background-image: url('../../../../images/CloseIcon.svg');
+    background-size: 58px 58px;
+}
+
+.modal-overlay__button_close-modal:hover {
+    opacity: 0.8;
+}
