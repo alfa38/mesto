@@ -23,12 +23,9 @@ const modalControl = (action) => {
 // add open modal event listener
 editProfileButton.addEventListener('click', (event) => {
     modalControl('open');
-    console.log('target', event.target.value);
     let currentNameContent = profileName.textContent;
     let currentProfessionContent = profileProfession.textContent;
     
-    console.log('name', currentNameContent);
-    console.log('prof', currentProfessionContent);
     modalOverlayNameInput.setAttribute('value', currentNameContent ?? '');
     modalOverlayProfessionInput.setAttribute('value', currentProfessionContent ?? '');
 });
