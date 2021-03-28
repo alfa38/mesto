@@ -17,3 +17,12 @@
 @import url('../block/profile/__button/profile__button.css');
 @import url('../block/profile/__button/_edit/profile__button_edit.css');
 @import url('../block/profile/__button/_add/profile__button_add.css');
+
+@import url('../block/cards-container/cards-container.css');
+
+@import url('../block/card-item/card-item.css');
+@import url('../block/card-item/__text-container/card-item__text-container.css');
+@import url('../block/card-item/__image/card-item__image.css');
+@import url('../block/card-item/__name/card-item__name.css');
+@import url('../block/card-item/__union/card-item__union.css');
+@import url('../block/card-item/__union/_active/card-item__union_action.css');
