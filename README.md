@@ -7,5 +7,3 @@
 Ипользована технология адаптивной вестки Flex и Grid. 
 
 Ссылка на [сайт](https://https://alfa38.github.io/mesto/index.html)
-
-Написан с использованием HTML5 и CSS3
