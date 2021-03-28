@@ -14,3 +14,11 @@
 .edit-form__input:focus {
     outline: none;
 }
+
+@media screen and (max-width: 767px) {
+    .edit-form__input {
+        max-width: 238px;
+        font-size: 14px;
+        line-height: auto;
+    }
+}

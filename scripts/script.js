@@ -40,6 +40,7 @@ closeModalButton.addEventListener('click', (event) => {
 
 // add saveButton event listener
 saveProfileSettingsButton.addEventListener('click', (event) => {
+    event.preventDefault();
     const name = modalOverlayNameInput.value;
     const profession = modalOverlayProfessionInput.value;
     if (checkInputValue(name, profession)) {

@@ -10,3 +10,11 @@
 .edit-form__button_save:hover {
     opacity: 0.8;
 }
+
+@media screen and (max-width: 767px) {
+    .edit-form__button_save {
+        max-width: 238px;
+        font-size: 14px;
+        line-height: auto;
+    }
+}

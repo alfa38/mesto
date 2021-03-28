@@ -15,3 +15,11 @@
         max-width: 580px; 
     }
 } 
+
+@media screen and (max-width: 767px) {
+    .cards-container {
+        grid-template-columns: repeat(1, 282px);
+        gap: 20px;
+        max-width: 282px;
+    }
+}

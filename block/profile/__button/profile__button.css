@@ -8,3 +8,7 @@
 .profile__button:hover {
     opacity: 0.6;
 }
+
+.profile__button:focus {
+    outline: none;
+}

@@ -1,7 +1,5 @@
 .modal-overlay__content {
     display: flex;
     flex-direction: column;
-    max-width: 90%;
-    max-height: 90%;
     margin: auto;
 }
