@@ -2,12 +2,15 @@
     margin: 0 0 41px 0;
     background-image: url('../../../images/Vector.svg');
     background-repeat: no-repeat;
+    background-size: 142px 33px;
     width: 142px;
     height: 33px;
 }
 
 @media screen and (max-width: 767px) {
     .header__logo {
-        margin-left: 27px;
+        background-size: 104px 24px;
+        width: 104px;
+        height: 24px;
     }
 }
