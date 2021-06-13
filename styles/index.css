@@ -15,8 +15,8 @@
 @import url('../block/profile/__name/profile__name.css');
 @import url('../block/profile/__profession/profile__profession.css');
 @import url('../block/profile/__button/profile__button.css');
-@import url('../block/profile/__button/_edit_profile/profile__button_edit_profile.css');
-@import url('../block/profile/__button/_add_card/profile__button_add_card.css');
+@import url('../block/profile/__button/_type/profile__button_type_add-card.css');
+@import url('../block/profile/__button/_type/profile__button_type_edit-profile.css');
 
 @import url('../block/cards-container/cards-container.css');
 
@@ -24,21 +24,20 @@
 @import url('../block/card-item/__text-container/card-item__text-container.css');
 @import url('../block/card-item/__image/card-item__image.css');
 @import url('../block/card-item/__name/card-item__name.css');
-@import url('../block/card-item/__union/card-item__union.css');
-@import url('../block/card-item/__union/_active/card-item__union_active.css');
 @import url('../block/card-item/__button/card-item__button.css');
+@import url('../block/card-item/__button/_active/card-item__button_active.css');
 
 @import url('../block/footer/footer.css');
-@import url('../block/footer/text-container/footer__text-container.css');
+@import url('../block/footer/__text-container/footer__text-container.css');
 
 @import url('../block/modal-overlay/modal-overlay.css');
 @import url('../block/modal-overlay/_open/modal-overlay_open.css');
 @import url('../block/modal-overlay/__content/modal-overlay__content.css');
 @import url('../block/modal-overlay/__button/modal-overlay__button.css');
-@import url('../block/modal-overlay/__button/_close_modal/modal-overlay__button_close_modal.css');
+@import url('../block/modal-overlay/__button/_type/modal-overlay__button_type_close-modal.css');
 
 @import url('../block/edit-form/edit-form.css');
 @import url('../block/edit-form/__input/edit-form__input.css');
 @import url('../block/edit-form/__header/edit-form__header.css');
 @import url('../block/edit-form/__button/edit-form__button.css');
-@import url('../block/edit-form/__button/_save_changes/edit-form__button_save_changes.css');
+@import url('../block/edit-form/__button/_type/edit-form__button_type_save-changes.css');

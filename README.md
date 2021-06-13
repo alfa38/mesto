@@ -6,4 +6,4 @@
 Верстка осуществлена средставами HTML5 и СSS.
 Ипользована технология адаптивной вестки Flex и Grid. 
 
-Ссылка на [сайт](https://https://alfa38.github.io/mesto/index.html)
+Ссылка на [сайт](https://alfa38.github.io/mesto/index.html)

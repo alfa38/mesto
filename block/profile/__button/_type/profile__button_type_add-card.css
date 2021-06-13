@@ -1,4 +1,4 @@
-.profile__button_add_card {
+.profile__button_type_add-card {
     width: 150px;
     height: 50px;
     border-radius: 5px;
@@ -12,7 +12,7 @@
 }
 
 @media screen and (max-width: 767px) {
-    .profile__button_add_card {
+    .profile__button_type_add-card {
         margin: 36px auto 0 auto;
         width: 100%;
         background-size: 16px 16px;
