@@ -64,6 +64,8 @@ let closeEditProfileModal = () => {
 }
 
 let closeAddNewCardModal = () => {
+    addCardNameInput.value = '';
+    addCardSourceInput.value = '';
     addCardOverlay.classList.remove('modal-overlay_open');
 }
 
@@ -87,8 +89,6 @@ let saveChanges = (event) => {
 let addNewCardFromModal = (event) => {
     event.preventDefault();
     addNewCard(addCardNameInput.value, addCardSourceInput.value);
-    addCardNameInput.value = '';
-    addCardSourceInput.value = '';
     closeAddNewCardModal();
 }
 
@@ -100,6 +100,7 @@ editProfileButton.addEventListener('click', openEditProfileModal);
 addCardButton.addEventListener('click', openAddNewCardModal);
 
 closeEditProfileButton.addEventListener('click', closeEditProfileModal);
+closeAddNewCardButton.addEventListener('click', closeAddNewCardModal);
 
 saveProfileSettingForm.addEventListener('submit', saveChanges);
 addNewCardForm.addEventListener('submit', addNewCardFromModal);
