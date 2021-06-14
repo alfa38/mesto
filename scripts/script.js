@@ -46,6 +46,7 @@ let profileName = document.querySelector('.profile__name');
 let profileProfession = document.querySelector('.profile__profession');
 
 let setLike = (button) => () => button.classList.toggle('card-item__button_active');
+let removeCard = (card) => () => card.remove();
 
 let addNewCard = (name, link) => {
     let templateCard = document.querySelector('#card-item-template').content;
@@ -53,6 +54,8 @@ let addNewCard = (name, link) => {
 
     let likeButton = newCard.querySelector('.card-item__button_type_set-like');
     likeButton.addEventListener('click', setLike(likeButton));
+    let removeButton = newCard.querySelector('.card-item__button_type_remove-card');
+    removeButton.addEventListener('click', removeCard(newCard));
     newCard.querySelector('.card-item__name').textContent = name;
     newCard.querySelector('.card-item__image').setAttribute('src', link);
     
