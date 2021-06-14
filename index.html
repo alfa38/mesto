@@ -35,7 +35,7 @@
         <p class="footer__text-container">@ 2021 Mesto Russia</p>
       </footer>
     </div>
-    <div class="modal-overlay">
+    <div class="modal-overlay" id="modal-edit-profile">
       <div class="modal-overlay__content">
         <!-- modal content start-->
         <button class="modal-overlay__button modal-overlay__button_type_close-modal" type="button" aria-label="Закрыть окно редактирования профиля"></button>
@@ -44,6 +44,19 @@
           <input name="name" class="edit-form__input edit-form__input_edit_name" type="text" placeholder="Введите Ваше Имя">
           <input name="profession" class="edit-form__input edit-form__input_edit_profession" type="text" placeholder="Укажите род вашей деятельности">
           <button class="edit-form__button edit-form__button_type_save-changes" type="submit" aria-label="Сохранить изменения">Сохранить</button>
+        </form>
+        <!-- modal content end -->
+      </div>
+    </div>
+    <div class="modal-overlay" id='modal-add-new-card'>
+      <div class="modal-overlay__content">
+        <!-- modal content start-->
+        <button class="modal-overlay__button modal-overlay__button_type_close-modal" type="button" aria-label="Закрыть окно редактирования профиля"></button>
+        <form name="form-add-new-card" class="edit-form">
+          <h2 class="edit-form__header">Новое место</h2>
+          <input name="name" class="edit-form__input edit-form__input_edit_name" type="text" placeholder="Название">
+          <input name="profession" class="edit-form__input edit-form__input_edit_img-source" type="text" placeholder="Ссылка на картинку">
+          <button class="edit-form__button edit-form__button_type_add-card" type="submit" aria-label="Добавить место">Сохранить</button>
         </form>
         <!-- modal content end -->
       </div>

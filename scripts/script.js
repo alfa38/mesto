@@ -27,55 +27,79 @@ const initialCards = [
 
 let cardsContainer = document.querySelector('.cards-container');
 
-let modalOverlay = document.querySelector('.modal-overlay');
+let addCardButton = document.querySelector('.profile__button_type_add-card');
+let addCardOverlay = document.querySelector('#modal-add-new-card');
+let addCardNameInput = addCardOverlay.querySelector('.edit-form__input_edit_name');
+let addCardSourceInput = addCardOverlay.querySelector('.edit-form__input_edit_img-source');
+let closeAddNewCardButton = addCardOverlay.querySelector('.modal-overlay__button_type_close-modal');
+let addNewCardForm = addCardOverlay.querySelector('.edit-form');
 
-let modalOverlayNameInput = modalOverlay.querySelector('.edit-form__input_edit_name');
-let modalOverlayProfessionInput = modalOverlay.querySelector('.edit-form__input_edit_profession');
-
-let closeModalButton = modalOverlay.querySelector('.modal-overlay__button_type_close-modal');
 let editProfileButton = document.querySelector('.profile__button_type_edit-profile');
-let saveProfileSettingForm = modalOverlay.querySelector('.edit-form');
+let editProfileOverlay = document.querySelector('#modal-edit-profile');
+let modalOverlayNameInput = editProfileOverlay.querySelector('.edit-form__input_edit_name');
+let modalOverlayProfessionInput = editProfileOverlay.querySelector('.edit-form__input_edit_profession');
+let closeEditProfileButton = editProfileOverlay.querySelector('.modal-overlay__button_type_close-modal');
+let saveProfileSettingForm = editProfileOverlay.querySelector('.edit-form');
+
 
 let profileName = document.querySelector('.profile__name');
 let profileProfession = document.querySelector('.profile__profession');
+
+let setLike = (button) => () => button.classList.toggle('card-item__button_active');
 
 let addNewCard = (name, link) => {
     let templateCard = document.querySelector('#card-item-template').content;
     let newCard = templateCard.querySelector('.card-item').cloneNode(true);
 
+    let likeButton = newCard.querySelector('.card-item__button_type_set-like');
+    likeButton.addEventListener('click', setLike(likeButton));
     newCard.querySelector('.card-item__name').textContent = name;
     newCard.querySelector('.card-item__image').setAttribute('src', link);
     
-    cardsContainer.append(newCard);
+    cardsContainer.prepend(newCard);
 }
 
-let openModal = () => {
-    modalOverlay.classList.add('modal-overlay_open');
+let closeEditProfileModal = () => {
+    editProfileOverlay.classList.remove('modal-overlay_open');
 }
 
-let closeModal = () => {
-    modalOverlay.classList.remove('modal-overlay_open');
+let closeAddNewCardModal = () => {
+    addCardOverlay.classList.remove('modal-overlay_open');
 }
 
-let editProfile = () => {
-    openModal();
+let openEditProfileModal = () => {
+    editProfileOverlay.classList.add('modal-overlay_open');
     modalOverlayNameInput.setAttribute('value', profileName.textContent ?? '');
     modalOverlayProfessionInput.setAttribute('value', profileProfession.textContent ?? '');
+}
+
+let openAddNewCardModal = () => {
+    addCardOverlay.classList.add('modal-overlay_open');
 }
 
 let saveChanges = (event) => {
     event.preventDefault();
     profileName.textContent = modalOverlayNameInput.value;
     profileProfession.textContent = modalOverlayProfessionInput.value;
-    closeModal();
+    closeEditProfileModal();
+}
+
+let addNewCardFromModal = (event) => {
+    event.preventDefault();
+    addNewCard(addCardNameInput.value, addCardSourceInput.value);
+    addCardNameInput.value = '';
+    addCardSourceInput.value = '';
+    closeAddNewCardModal();
 }
 
 initialCards.forEach((cardData) => {
     addNewCard(cardData.name, cardData.link);
 });
 
-editProfileButton.addEventListener('click', editProfile);
+editProfileButton.addEventListener('click', openEditProfileModal);
+addCardButton.addEventListener('click', openAddNewCardModal);
 
-closeModalButton.addEventListener('click', closeModal);
+closeEditProfileButton.addEventListener('click', closeEditProfileModal);
 
 saveProfileSettingForm.addEventListener('submit', saveChanges);
+addNewCardForm.addEventListener('submit', addNewCardFromModal);
