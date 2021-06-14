@@ -41,6 +41,9 @@ let modalOverlayProfessionInput = editProfileOverlay.querySelector('.edit-form__
 let closeEditProfileButton = editProfileOverlay.querySelector('.modal-overlay__button_type_close-modal');
 let saveProfileSettingForm = editProfileOverlay.querySelector('.edit-form');
 
+let photoViewierOverlay = document.querySelector('#modal-photo-viewier');
+let closePhotoViewierButton = photoViewierOverlay.querySelector('.modal-overlay__button_type_close-modal');
+
 
 let profileName = document.querySelector('.profile__name');
 let profileProfession = document.querySelector('.profile__profession');
@@ -51,14 +54,18 @@ let removeCard = (card) => () => card.remove();
 let addNewCard = (name, link) => {
     let templateCard = document.querySelector('#card-item-template').content;
     let newCard = templateCard.querySelector('.card-item').cloneNode(true);
-
     let likeButton = newCard.querySelector('.card-item__button_type_set-like');
-    likeButton.addEventListener('click', setLike(likeButton));
     let removeButton = newCard.querySelector('.card-item__button_type_remove-card');
-    removeButton.addEventListener('click', removeCard(newCard));
+    let cardImage = newCard.querySelector('.card-item__image');
+
     newCard.querySelector('.card-item__name').textContent = name;
     newCard.querySelector('.card-item__image').setAttribute('src', link);
-    
+    newCard.querySelector('.card-item__image').setAttribute('alt', `Картинка "${name}"`);
+
+    likeButton.addEventListener('click', setLike(likeButton));
+    removeButton.addEventListener('click', removeCard(newCard));
+    cardImage.addEventListener('click', createOpenPhotoViewierEventListener(name, link));
+
     cardsContainer.prepend(newCard);
 }
 
@@ -67,9 +74,12 @@ let closeEditProfileModal = () => {
 }
 
 let closeAddNewCardModal = () => {
-    addCardNameInput.value = '';
-    addCardSourceInput.value = '';
+    addNewCardForm.reset();
     addCardOverlay.classList.remove('modal-overlay_open');
+}
+
+let closePhotoViewierModal = () => {
+    photoViewierOverlay.classList.remove('modal-overlay_open');
 }
 
 let openEditProfileModal = () => {
@@ -80,6 +90,15 @@ let openEditProfileModal = () => {
 
 let openAddNewCardModal = () => {
     addCardOverlay.classList.add('modal-overlay_open');
+}
+
+let createOpenPhotoViewierEventListener = (name, link) => () => openPhotoViewierModal(name, link);
+
+let openPhotoViewierModal = (name, link) => {
+    photoViewierOverlay.querySelector('.photo-viewier__image').setAttribute('src', link);
+    photoViewierOverlay.querySelector('.photo-viewier__image').setAttribute('alt', name);
+    photoViewierOverlay.querySelector('.photo-viewier__caption').textContent = name;
+    photoViewierOverlay.classList.add('modal-overlay_open');
 }
 
 let saveChanges = (event) => {
@@ -104,6 +123,7 @@ addCardButton.addEventListener('click', openAddNewCardModal);
 
 closeEditProfileButton.addEventListener('click', closeEditProfileModal);
 closeAddNewCardButton.addEventListener('click', closeAddNewCardModal);
+closePhotoViewierButton.addEventListener('click', closePhotoViewierModal);
 
 saveProfileSettingForm.addEventListener('submit', saveChanges);
 addNewCardForm.addEventListener('submit', addNewCardFromModal);
