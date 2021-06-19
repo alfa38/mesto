@@ -33,6 +33,7 @@ const addCardNameInput = addCardOverlay.querySelector(".edit-form__input_edit_na
 const addCardSourceInput = addCardOverlay.querySelector(".edit-form__input_edit_img-source");
 const closeAddNewCardButton = addCardOverlay.querySelector(".modal-overlay__button_type_close-modal");
 const addNewCardForm = addCardOverlay.querySelector(".edit-form");
+const addNewCardSaveButton = addCardOverlay.querySelector(".edit-form__button_type_add-card");
 
 const editProfileButton = document.querySelector(".profile__button_type_edit-profile");
 const editProfileOverlay = document.querySelector("#modal-edit-profile");
@@ -105,7 +106,23 @@ const addNewCardFromModal = (event) => {
     event.preventDefault();
     addNewCard(addCardNameInput.value, addCardSourceInput.value);
     addNewCardForm.reset();
+    addNewCardSaveButton.classList.add("edit-form__button_disabled");
     closeModal(addCardOverlay);
+};
+
+document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+        const modal = document.querySelector(".modal-overlay_open");
+        if (modal) {
+            closeModal(modal);
+        }
+    }
+});
+
+const closeModalHandler = (event) => {
+    if (event.target.classList.contains("modal-overlay_open")) {
+        event.target.classList.remove("modal-overlay_open");
+    }
 };
 
 editProfileButton.addEventListener("click", openEditProfileModal);
@@ -117,6 +134,10 @@ closePhotoViewierButton.addEventListener("click", () => closeModal(photoViewierO
 
 saveProfileSettingForm.addEventListener("submit", saveChanges);
 addNewCardForm.addEventListener("submit", addNewCardFromModal);
+
+editProfileOverlay.addEventListener("click", closeModalHandler);
+addCardOverlay.addEventListener("click", closeModalHandler);
+photoViewierOverlay.addEventListener("click", closeModalHandler);
 
 initialCards.forEach((cardData) => {
     addNewCard(cardData.name, cardData.link);

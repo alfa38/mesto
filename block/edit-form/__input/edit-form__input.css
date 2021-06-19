@@ -16,10 +16,6 @@
     outline: none;
 }
 
-.edit-form__input:last-of-type {
-    margin-bottom: 0;
-}
-
 @media screen and (max-width: 767px) {
     .edit-form__input {
         max-width: 238px;
