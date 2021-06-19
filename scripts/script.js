@@ -145,16 +145,13 @@ const removeOnEscapeHandlerForOverlay = () => {
 editProfileButton.addEventListener("click", openEditProfileModal);
 addCardButton.addEventListener("click", () => openModal(addCardOverlay));
 
-closeEditProfileButton.addEventListener("click", () => closeModal(editProfileOverlay));
-closeAddNewCardButton.addEventListener("click", () => closeModal(addCardOverlay));
-closePhotoViewierButton.addEventListener("click", () => closeModal(photoViewierOverlay));
+closeEditProfileButton.addEventListener("click", () => closeModal());
+closeAddNewCardButton.addEventListener("click", () => closeModal());
+closePhotoViewierButton.addEventListener("click", () => closeModal());
 
 saveProfileSettingForm.addEventListener("submit", saveChanges);
 addNewCardForm.addEventListener("submit", addNewCardFromModal);
 
-// editProfileOverlay.addEventListener("click", closeModalHandler);
-// addCardOverlay.addEventListener("click", closeModalHandler);
-// photoViewierOverlay.addEventListener("click", closeModalHandler);
 
 initialCards.forEach((cardData) => {
     addNewCard(cardData.name, cardData.link);
