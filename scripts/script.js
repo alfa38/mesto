@@ -77,9 +77,14 @@ const addNewCard = (name, link) => {
 
 const openModal = (modal) => {
     modal.classList.add("modal-overlay_open");
+    addOnClickCloseHandlerToOverlay(modal);
 };
-const closeModal = (modal) => {
-    modal.classList.remove("modal-overlay_open");
+const closeModal = () => {
+    const modal = document.querySelector(".modal-overlay_open");
+    if (modal) {
+        modal.classList.remove("modal-overlay_open");
+        modal.removeEventListener("click", closeModalHandler, false);
+    }   
 };
 
 const openEditProfileModal = () => {
@@ -99,7 +104,7 @@ const saveChanges = (event) => {
     event.preventDefault();
     profileName.textContent = modalOverlayNameInput.value;
     profileProfession.textContent = modalOverlayProfessionInput.value;
-    closeModal(editProfileOverlay);
+    closeModal();
 };
 
 const addNewCardFromModal = (event) => {
@@ -107,22 +112,25 @@ const addNewCardFromModal = (event) => {
     addNewCard(addCardNameInput.value, addCardSourceInput.value);
     addNewCardForm.reset();
     addNewCardSaveButton.classList.add("edit-form__button_disabled");
-    closeModal(addCardOverlay);
+    closeModal();
 };
 
 document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") {
-        const modal = document.querySelector(".modal-overlay_open");
-        if (modal) {
-            closeModal(modal);
-        }
+        closeModal();
     }
 });
 
+
+
 const closeModalHandler = (event) => {
     if (event.target.classList.contains("modal-overlay_open")) {
-        event.target.classList.remove("modal-overlay_open");
+        closeModal();
     }
+};
+
+const addOnClickCloseHandlerToOverlay = (modal) => {
+    modal.addEventListener("click", closeModalHandler, false);
 };
 
 editProfileButton.addEventListener("click", openEditProfileModal);
@@ -135,9 +143,9 @@ closePhotoViewierButton.addEventListener("click", () => closeModal(photoViewierO
 saveProfileSettingForm.addEventListener("submit", saveChanges);
 addNewCardForm.addEventListener("submit", addNewCardFromModal);
 
-editProfileOverlay.addEventListener("click", closeModalHandler);
-addCardOverlay.addEventListener("click", closeModalHandler);
-photoViewierOverlay.addEventListener("click", closeModalHandler);
+// editProfileOverlay.addEventListener("click", closeModalHandler);
+// addCardOverlay.addEventListener("click", closeModalHandler);
+// photoViewierOverlay.addEventListener("click", closeModalHandler);
 
 initialCards.forEach((cardData) => {
     addNewCard(cardData.name, cardData.link);
