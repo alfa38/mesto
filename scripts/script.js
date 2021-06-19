@@ -78,12 +78,14 @@ const addNewCard = (name, link) => {
 const openModal = (modal) => {
     modal.classList.add("modal-overlay_open");
     addOnClickCloseHandlerToOverlay(modal);
+    addOnEscapeHandlerForOverlay();
 };
 const closeModal = () => {
     const modal = document.querySelector(".modal-overlay_open");
     if (modal) {
         modal.classList.remove("modal-overlay_open");
         modal.removeEventListener("click", closeModalHandler, false);
+        removeOnEscapeHandlerForOverlay();
     }   
 };
 
@@ -115,13 +117,6 @@ const addNewCardFromModal = (event) => {
     closeModal();
 };
 
-document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") {
-        closeModal();
-    }
-});
-
-
 
 const closeModalHandler = (event) => {
     if (event.target.classList.contains("modal-overlay_open")) {
@@ -131,6 +126,20 @@ const closeModalHandler = (event) => {
 
 const addOnClickCloseHandlerToOverlay = (modal) => {
     modal.addEventListener("click", closeModalHandler, false);
+};
+
+const onEscapeCloseModalHandler = (event) => {
+    if (event.key === "Escape") {
+        closeModal();
+    }
+};
+
+const addOnEscapeHandlerForOverlay = () => {
+    document.addEventListener("keydown", onEscapeCloseModalHandler);
+};
+
+const removeOnEscapeHandlerForOverlay = () => {
+    document.removeEventListener("keydown", onEscapeCloseModalHandler);
 };
 
 editProfileButton.addEventListener("click", openEditProfileModal);
