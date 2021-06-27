@@ -1,43 +1,32 @@
-import { openPhotoViewierModal } from "./modalControls.js";
-import { initialCards, cardsContainer, cardItemSelector } from "./constants.js";
+import { openPhotoViewierModal } from "./index.js";
 
-export const addNewCard = (cardData, container, cardItemSelector) => {
-    container.prepend(new DefaultCard(cardData, cardItemSelector).createCard());
-};
-
-export class DefaultCard {
+export class Card {
     constructor(data, templateSelector) {
         this._name = data.name;
         this._link = data.link;
         this._template = document.querySelector(templateSelector).content;
     }
 
-    _setLike(buttonElement) {
-        return () => buttonElement.classList.toggle("card-item__button_active");
-    }
-    _removeCardHandler(cardElement) {
-        return () => cardElement.remove();
+    _setLike() {
+        return () => this._likeButton.classList.toggle("card-item__button_active");
     }
 
+    _setEventListeners() {
+        this._likeButton.addEventListener("click", this._setLike(this._likeButton));
+        this._removeButton.addEventListener("click", () => this._newCard.remove());
+        this._cardImage.addEventListener("click", () => openPhotoViewierModal(this._name, this._link));
+    }
+    
     createCard() {
-        const newCard = this._template.querySelector(".card-item").cloneNode(true);
-        const likeButton = newCard.querySelector(".card-item__button_type_set-like");
-        const removeButton = newCard.querySelector(".card-item__button_type_remove-card");
-        const cardImage = newCard.querySelector(".card-item__image");
+        this._newCard = this._template.querySelector(".card-item").cloneNode(true);
+        this._likeButton = this._newCard.querySelector(".card-item__button_type_set-like");
+        this._removeButton = this._newCard.querySelector(".card-item__button_type_remove-card");
+        this._cardImage = this._newCard.querySelector(".card-item__image");
 
-        newCard.querySelector(".card-item__name").textContent = this._name;
-        cardImage.setAttribute("src", this._link);
-        cardImage.setAttribute("alt", `Картинка "${this._name}"`);
-
-        likeButton.addEventListener("click", this._setLike(likeButton));
-        removeButton.addEventListener("click", this._removeCardHandler(newCard));
-        cardImage.addEventListener("click", () => openPhotoViewierModal(this._name, this._link));
-        return newCard;
+        this._newCard.querySelector(".card-item__name").textContent = this._name;
+        this._cardImage.setAttribute("src", this._link);
+        this._cardImage.setAttribute("alt", `Картинка "${this._name}"`);
+        this._setEventListeners();
+        return this._newCard;
     }
 }
-
-export const initializeCards = () => {
-    initialCards.forEach((cardData) => {
-        addNewCard(cardData, cardsContainer, cardItemSelector);
-    });
-};
