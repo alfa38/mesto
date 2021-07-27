@@ -1,4 +1,4 @@
-import { openPhotoViewierModal } from "./index.js";
+import { openPhotoViewierModal } from "./utils/utils.js";
 
 export class Card {
     constructor(data, templateSelector) {
