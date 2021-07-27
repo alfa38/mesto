@@ -51,6 +51,10 @@ export class FormValidator {
         };
     }
 
+    _setEventListeners(element, errorField) {
+        element.addEventListener("input", this._inputValidationHandler(element, errorField));
+    }
+
     resetForm() {
         this._form.reset();
         this._formInputs.forEach((inputElement) => {
@@ -65,7 +69,7 @@ export class FormValidator {
     enableValidation() {
         this._formInputs.forEach((inputElement) => {
             const errorField = this._form.querySelector(`.${inputElement.id}-error`);
-            inputElement.addEventListener("input", this._inputValidationHandler(inputElement, errorField));
+            this._setEventListeners(inputElement, errorField);
         });
     }
 }

@@ -5,10 +5,7 @@ import { selectors, initialCards } from "./constants.js";
 import { cardItemSelector} from "./constants.js";
 import { cardsContainer } from "./constants.js";
 
-const photoViewierOverlay = document.querySelector("#modal-photo-viewier");
-const photoViewierImage = photoViewierOverlay.querySelector(".photo-viewier__image");
-const photoViewierCaption = photoViewierOverlay.querySelector(".photo-viewier__caption");
-const closePhotoViewierButton = photoViewierOverlay.querySelector(".modal-overlay__button_type_close-modal");
+import { openModal, closeModal, photoViewierOverlay, closePhotoViewierButton } from "./utils/utils.js";
 
 const addCardOverlay = document.querySelector("#modal-add-new-card");
 const addNewCardForm = addCardOverlay.querySelector(".edit-form");
@@ -28,42 +25,6 @@ const profileProfession = document.querySelector(".profile__profession");
 
 const addCardValidator = new FormValidator(selectors, addNewCardForm);
 const editProfileValidator = new FormValidator(selectors, editProfileForm);
-
-export const openModal = (modal) => {
-    modal.classList.add("modal-overlay_open");
-    addOnClickCloseHandlerToOverlay(modal);
-    addOnEscapeHandlerForOverlay(modal);
-};
-
-export const closeModal = (modal) => {
-    modal.classList.remove("modal-overlay_open");
-    modal.removeEventListener("click", onEscapeCloseModalHandler, false);
-    removeOnEscapeHandlerForOverlay();
-};
-
-const removeOnEscapeHandlerForOverlay = () => {
-    document.removeEventListener("keydown", onEscapeCloseModalHandler);
-};
-
-const onEscapeCloseModalHandler = (event, modal) => {
-    if (event.key === "Escape") {
-        closeModal(modal);
-    }
-};
-
-const onOverlayClickHandler = (event) => {
-    if (event.target.classList.contains("modal-overlay_open")) {
-        closeModal(event.target);
-    }
-};
-
-const addOnClickCloseHandlerToOverlay = (modal) => {
-    modal.addEventListener("click", onOverlayClickHandler, false);
-};
-
-const addOnEscapeHandlerForOverlay = (modal) => {
-    document.addEventListener("keydown", (event) => onEscapeCloseModalHandler(event, modal));
-};
 
 const submitEditProfileForm = (event) => {
     event.preventDefault();
@@ -92,18 +53,10 @@ const addNewCardFromModal = (event) => {
     closeModal(addCardOverlay);
 };
 
-export const openPhotoViewierModal = (name, link) => {
-    photoViewierImage.setAttribute("src", link);
-    photoViewierImage.setAttribute("alt", name);
-    photoViewierCaption.textContent = name;
-    openModal(photoViewierOverlay);
-};
-
-export const initModalControls = () => {
+const initModalControls = () => {
     closeEditProfileButton.addEventListener("click", () => closeModal(editProfileOverlay));
     closeAddNewCardButton.addEventListener("click", () => closeModal(addCardOverlay));
     closePhotoViewierButton.addEventListener("click", () => closeModal(photoViewierOverlay));
-
 
     editProfileButton.addEventListener("click", openEditProfileModal);
     addCardButton.addEventListener("click", openAddCardOverlay);
@@ -111,11 +64,11 @@ export const initModalControls = () => {
     addNewCardForm.addEventListener("submit", addNewCardFromModal);
 };
 
-export const addNewCard = (cardData, container, cardItemSelector) => {
+const addNewCard = (cardData, container, cardItemSelector) => {
     container.prepend(new Card(cardData, cardItemSelector).createCard());
 };
 
-export const initializeCards = () => {
+const initializeCards = () => {
     initialCards.forEach((cardData) => {
         addNewCard(cardData, cardsContainer, cardItemSelector);
     });
