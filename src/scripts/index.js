@@ -1,4 +1,4 @@
-import { FormValidator } from "./FormValidation.js";
+import { FormValidator } from "./components/FormValidator.js";
 import Card from "./components/Card.js";
 import { selectors, initialCards, cardsContainerSelector } from "./constants.js";
 
@@ -32,7 +32,7 @@ const rendererFunction = (item) => {
 
 const submitAddNewCard = (event, [name, link]) => {
     event.preventDefault();
-    cardSection.addItem(new Card({ name, link }, cardItemSelector, handleCardClick).createCard());
+    cardSection.addItem({ name, link });
 };
 
 const submitEditProfileForm = (event, [name, profession]) => {
@@ -53,8 +53,14 @@ const initModalControls = () => {
     addCardModal.setEventListeners();
     photoViewierModal.setEventListeners();
 
-    editProfileButton.addEventListener("click", () => editProfileModal.openModal());
-    addCardButton.addEventListener("click", () => addCardModal.openModal());
+    editProfileButton.addEventListener("click", () => {
+        editProfileModal.openModal();
+        editProfileValidator.resetForm();
+    });
+    addCardButton.addEventListener("click", () => {
+        addCardValidator.resetForm();
+        addCardModal.openModal();
+    });
 
 };
 

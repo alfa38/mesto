@@ -5,21 +5,19 @@ class ModalWithForm extends Modal {
         super(props);
         this._formSubmitCallback = formSubmitCallback;
         this._form = this._modal.querySelector(".edit-form");
+        this._inputs = this._form.querySelectorAll(".edit-form__input");
+
     }
 
     _getInputValues() {
-        this._form = this._modal.querySelector(".edit-form");
-        const inputs = this._form.querySelectorAll(".edit-form__input");
 
-        return Array.from(inputs).map((node) => {
+        return Array.from(this._inputs).map((node) => {
             return node.value;
         });
     }
 
     setEventListeners() {
-        this._modal.addEventListener("click", this.handleOverlayClick.bind(this), false);
-        const button = this._modal.querySelector(".modal-overlay__button_type_close-modal");
-        button.addEventListener("click", () => this.closeModal());
+        super.setEventListeners();
         this._form.addEventListener("submit", (event) => {
             this._formSubmitCallback(event, this._getInputValues());
             this.closeModal();
@@ -27,8 +25,7 @@ class ModalWithForm extends Modal {
     }
     
     closeModal() {
-        this._modal.classList.remove("modal-overlay_open");
-        document.removeEventListener("keydown", this._handleEscClose, false);
+        super.closeModal();
         this._form.reset();
     }
 }
