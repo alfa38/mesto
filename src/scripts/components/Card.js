@@ -1,10 +1,9 @@
-import { openPhotoViewierModal } from "./utils/utils.js";
-
-export class Card {
-    constructor(data, templateSelector) {
-        this._name = data.name;
-        this._link = data.link;
+class Card {
+    constructor({name, link}, templateSelector, handleCardClick) {
+        this._name = name;
+        this._link = link;
         this._template = document.querySelector(templateSelector).content;
+        this._handleCardClick = handleCardClick;
     }
 
     _setLike() {
@@ -14,8 +13,10 @@ export class Card {
     _setEventListeners() {
         this._likeButton.addEventListener("click", this._setLike(this._likeButton));
         this._removeButton.addEventListener("click", () => this._newCard.remove());
-        this._cardImage.addEventListener("click", () => openPhotoViewierModal(this._name, this._link));
+        this._cardImage.addEventListener("click", (event) => this._handleCardClick(event, this._name, this._link));
     }
+
+
     
     createCard() {
         this._newCard = this._template.querySelector(".card-item").cloneNode(true);
@@ -30,3 +31,5 @@ export class Card {
         return this._newCard;
     }
 }
+
+export default Card;
