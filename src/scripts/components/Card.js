@@ -11,11 +11,8 @@ class Card {
     }
 
     _setEventListeners() {
-        // Свяжите класс Card c попапом. Сделайте так, чтобы Card принимал в конструктор функцию handleCardClick.
-        // Эта функция должна открывать попап с картинкой при клике на карточку.
         this._likeButton.addEventListener("click", this._setLike(this._likeButton));
         this._removeButton.addEventListener("click", () => this._newCard.remove());
-        // this._cardImage.addEventListener("click", () => openPhotoViewierModal(this._name, this._link));
         this._cardImage.addEventListener("click", (event) => this._handleCardClick(event, this._name, this._link));
     }
 

@@ -7,7 +7,6 @@ class ModalWithForm extends Modal {
         this._form = this._modal.querySelector(".edit-form");
     }
 
-    // Содержит приватный метод _getInputValues, который собирает данные всех полей формы.
     _getInputValues() {
         this._form = this._modal.querySelector(".edit-form");
         const inputs = this._form.querySelectorAll(".edit-form__input");
@@ -16,9 +15,6 @@ class ModalWithForm extends Modal {
             return node.value;
         });
     }
-
-    // Перезаписывает родительский метод setEventListeners.
-    // Метод setEventListeners класса PopupWithForm должен не только добавлять обработчик клика иконке закрытия, но и добавлять обработчик сабмита формы.
 
     setEventListeners() {
         this._modal.addEventListener("click", this.handleOverlayClick.bind(this), false);
@@ -29,7 +25,6 @@ class ModalWithForm extends Modal {
             this.closeModal();
         });
     }
-    // Перезаписывает родительский метод close, так как при закрытии попапа форма должна ещё и сбрасываться.
     
     closeModal() {
         this._modal.classList.remove("modal-overlay_open");
