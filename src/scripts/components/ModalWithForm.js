@@ -10,7 +10,6 @@ class ModalWithForm extends Modal {
     }
 
     _getInputValues() {
-
         return Array.from(this._inputs).map((node) => {
             return node.value;
         });
