@@ -1,7 +1,7 @@
-export const photoViewierOverlay = document.querySelector("#modal-photo-viewier");
-const photoViewierImage = photoViewierOverlay.querySelector(".photo-viewier__image");
-const photoViewierCaption = photoViewierOverlay.querySelector(".photo-viewier__caption");
-export const closePhotoViewierButton = photoViewierOverlay.querySelector(".modal-overlay__button_type_close-modal");
+// export const photoViewierOverlay = document.querySelector("#modal-photo-viewier");
+// const photoViewierImage = photoViewierOverlay.querySelector(".photo-viewier__image");
+// const photoViewierCaption = photoViewierOverlay.querySelector(".photo-viewier__caption");
+// export const closePhotoViewierButton = photoViewierOverlay.querySelector(".modal-overlay__button_type_close-modal");
 
 // const onEscapeCloseModalHandler = (event, modal) => {
 //     if (event.key === "Escape") {
@@ -37,9 +37,9 @@ export const closeModal = (modal) => {
     document.removeEventListener("keydown", closeByEsc, false);
 };
 
-export const openPhotoViewierModal = (name, link) => {
-    photoViewierImage.setAttribute("src", link);
-    photoViewierImage.setAttribute("alt", name);
-    photoViewierCaption.textContent = name;
-    openModal(photoViewierOverlay);
-};
+// export const openPhotoViewierModal = (name, link) => {
+//     photoViewierImage.setAttribute("src", link);
+//     photoViewierImage.setAttribute("alt", name);
+//     photoViewierCaption.textContent = name;
+//     openModal(photoViewierOverlay);
+// };
