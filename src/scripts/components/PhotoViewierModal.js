@@ -11,8 +11,7 @@ class PhotoViewierModal extends Modal {
         this._image.setAttribute("src", link);
         this._image.setAttribute("alt", name);
         this._caption.textContent = name;
-        this._modal.classList.add("modal-overlay_open");
-        document.addEventListener("keydown", this._handleEscClose, false);
+        super.openModal();
     }
 }
 
