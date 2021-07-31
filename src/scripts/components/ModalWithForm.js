@@ -6,6 +6,8 @@ class ModalWithForm extends Modal {
         this._formSubmitCallback = formSubmitCallback;
         this._form = this._modal.querySelector(".edit-form");
         this._inputs = this._form.querySelectorAll(".edit-form__input");
+        this._button = this._form.querySelector(".edit-form__button");
+        this._buttonText = this._button.textContent;
 
     }
 
@@ -18,9 +20,16 @@ class ModalWithForm extends Modal {
     setEventListeners() {
         super.setEventListeners();
         this._form.addEventListener("submit", (event) => {
-            this._formSubmitCallback(event, this._getInputValues());
-            this.closeModal();
+            this._button.textContent = "Сохранение...";
+            this._formSubmitCallback(event, this._getInputValues()).finally(() => {
+                this.closeModal();
+            });
         });
+    }
+
+    openModal() {
+        super.openModal();
+        this._button.textContent = this._buttonText;
     }
     
     closeModal() {

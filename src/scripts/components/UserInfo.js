@@ -1,7 +1,9 @@
+
 class UserInfo {
     constructor(nameSelector, professionSelector) {
         this._nameInput = document.querySelector(nameSelector);
         this._professionInput = document.querySelector(professionSelector);
+        this._userId = "";
     }
 
     getUserInfo() {
@@ -11,9 +13,14 @@ class UserInfo {
         };
     }
 
-    setUserInfo(name, profession) {
-        this._nameInput.textContent = name;
-        this._professionInput.textContent = profession;
+    setUserInfo(data) {
+        this._nameInput.textContent = data.name;
+        this._professionInput.textContent = data.about;
+        this._userId = data._id;
+    }
+
+    getUserId() {
+        return this._userId;
     }
 }
 
