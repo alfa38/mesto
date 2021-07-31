@@ -10,6 +10,8 @@
 
 @import url('../block/profile/profile.css');
 @import url('../block/profile/__avatar/profile__avatar.css');
+@import url('../block/profile/__avatar-container/profile__avatar-container.css');
+@import url('../block/profile/__avatar-overlay/profile__avatar-overlay.css');
 @import url('../block/profile/__data-container/profile__data-container.css');
 @import url('../block/profile/__name-container/profile__name-container.css');
 @import url('../block/profile/__name/profile__name.css');
@@ -22,9 +24,12 @@
 
 @import url('../block/card-item/card-item.css');
 @import url('../block/card-item/__text-container/card-item__text-container.css');
+@import url('../block/card-item/__like-container/card-item__like-container.css');
+@import url('../block/edit-form/__inputs-container/edit-form__inputs-container.css');
 @import url('../block/card-item/__image/card-item__image.css');
 @import url('../block/card-item/__name/card-item__name.css');
 @import url('../block/card-item/__button/card-item__button.css');
+@import url('../block/card-item/__like-count/card-item__like-count.css');
 @import url('../block/card-item/__button/_active/card-item__button_active.css');
 @import url('../block/card-item/__button/_type/card-item__button_type_remove-card.css');
 @import url('../block/card-item/__image-container/card-item__image-container.css');

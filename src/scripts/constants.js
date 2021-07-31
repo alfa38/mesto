@@ -25,6 +25,16 @@ export const initialCards = [
     }
 ];
 
+const tokenId = "6e43fb48-bfc3-4ca2-9d57-c20947fe10e7";
+
+export const apiOptions = {
+    baseUrl: "https://nomoreparties.co/v1/cohort-26",
+    headers: {
+        authorization: tokenId,
+        "Content-Type": "application/json"
+    }
+};
+
 export const selectors = {
     formSelector: ".edit-form",
     inputSelector: ".edit-form__input",

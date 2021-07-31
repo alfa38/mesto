@@ -4,6 +4,10 @@ class Section {
         this._renderer = renderer;
         this._container = document.querySelector(containerSelector);
     }
+    
+    _clearContainer() {
+        this._container.textContent = "";
+    }
 
     renderItems() {
         this._items.forEach((item) => {
@@ -12,6 +16,13 @@ class Section {
         
         this.element = undefined;
     }
+
+    setItems(items) {
+        this._items = items;
+        this._clearContainer();
+        this.renderItems();
+    }
+
 
     addItem(item) {
         this._element = this._renderer(item);

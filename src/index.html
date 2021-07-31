@@ -16,7 +16,11 @@
         <!-- profile section -->
         <section class="profile">
             <!-- <img class="profile__avatar" src="require(images/kusto.jpg)>" alt="Ваш аватар"> -->
-            <img class="profile__avatar">
+            <div class="profile__avatar-container">
+              <img class="profile__avatar">
+              <div class="profile__avatar-overlay">
+              </div>
+            </div>
           <div class="profile__data-container">
             <div class="profile__name-container">
               <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -41,10 +45,13 @@
         <button class="modal-overlay__button modal-overlay__button_type_close-modal" type="button" aria-label="Закрыть окно редактирования профиля"></button>
         <form name="form-profile-edit" class="edit-form">
           <h2 class="edit-form__header">Редактировать профиль</h2>
-          <input minlength="2" maxlength="40" name="name" id="input-name" class="edit-form__input edit-form__input_edit_name" type="text" placeholder="Введите Ваше Имя" required>
+          <div class="edit-form__inputs-container">
+            <input minlength="2" maxlength="40" name="name" id="input-name" class="edit-form__input edit-form__input_edit_name" type="text" placeholder="Введите Ваше Имя" required>
           <span class="edit-form__error input-name-error">Error</span>
           <input minlength="2" maxlength="200" name="profession" id="input-profession" class="edit-form__input edit-form__input_edit_profession" type="text" placeholder="Укажите род вашей деятельности" required>
           <span class="edit-form__error input-profession-error">Error</span>
+          </div>
+          
           <button class="edit-form__button edit-form__button_type_save-changes" type="submit" aria-label="Сохранить изменения">Сохранить</button>
         </form>
         <!-- modal content end -->
@@ -56,11 +63,39 @@
         <button class="modal-overlay__button modal-overlay__button_type_close-modal" type="button" aria-label="Закрыть окно редактирования профиля"></button>
         <form name="form-add-new-card" class="edit-form">
           <h2 class="edit-form__header">Новое место</h2>
-          <input name="cardName" class="edit-form__input edit-form__input_edit_name" id="input-cardname" type="text" placeholder="Название" minlength="2" maxlength="30" required>
+          <div class="edit-form__inputs-container">
+            <input name="cardName" class="edit-form__input edit-form__input_edit_name" id="input-cardname" type="text" placeholder="Название" minlength="2" maxlength="30" required>
             <span class="edit-form__error input-cardname-error">Error</span>
           <input name="cardLink"  id="input-cardlink" type="url" class="edit-form__input edit-form__input_edit_img-source" placeholder="Ссылка на картинку" required>
             <span class="edit-form__error input-cardlink-error">Error</span>
+          </div>
           <button class="edit-form__button edit-form__button_type_add-card edit-form__button_disabled" type="submit" aria-label="Добавить место" disabled>Сохранить</button>
+        </form>
+        <!-- modal content end -->
+      </div>
+    </div>
+    <div class="modal-overlay" id='modal-update-avatar'>
+      <div class="modal-overlay__content">
+        <!-- modal content start-->
+        <button class="modal-overlay__button modal-overlay__button_type_close-modal" type="button" aria-label="Закрыть окно без обновления аватара"></button>
+        <form name="form-update-avatar" class="edit-form">
+          <h2 class="edit-form__header">Новое место</h2>
+          <div class="edit-form__inputs-container">
+          <input name="avatarLink"  id="input-avatarLink" type="url" class="edit-form__input edit-form__input_edit_img-source" placeholder="Ссылка на новую аватару" required>
+            <span class="edit-form__error input-avatarLink-error">Error</span>
+          </div>
+          <button class="edit-form__button edit-form__button_type_add-card edit-form__button_disabled" type="submit" aria-label="Сменить аватар" disabled>Сохранить</button>
+        </form>
+        <!-- modal content end -->
+      </div>
+    </div>
+    <div class="modal-overlay" id='modal-confirm-delete'>
+      <div class="modal-overlay__content">
+        <!-- modal content start-->
+        <button class="modal-overlay__button modal-overlay__button_type_close-modal" type="button" aria-label="Закрыть без удаления"></button>
+        <form name="form-confirm-delete" class="edit-form">
+          <h2 class="edit-form__header">Вы уверены?</h2>
+          <button class="edit-form__button edit-form__button_type_confirm-delete" type="submit" aria-label="Вы уверены что хотите удалить карточку?">Да</button>
         </form>
         <!-- modal content end -->
       </div>
@@ -84,7 +119,10 @@
         </div>
         <div class="card-item__text-container">
           <h2 class="card-item__name">Сентинский храм, г. Карачаевск, Россия</h2>
-          <button class="card-item__button card-item__button_type_set-like" type="button" aria-label="Поставить лайк"></button>
+          <div class="card-item__like-container">
+            <button class="card-item__button card-item__button_type_set-like" type="button" aria-label="Поставить лайк"></button>
+            <span class="card-item__like-count"></span>
+          </div>
         </div>
       </div>
     </template>

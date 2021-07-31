@@ -21,7 +21,7 @@
 @media screen and (max-width: 767px) {
     .edit-form__button {
         height: 46px;
-        margin-top: 45px;
+        margin-top: 15px;
         margin-bottom: 25px;
         max-width: 238px;
         font-size: 14px;
