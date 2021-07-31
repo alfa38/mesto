@@ -1,6 +1,6 @@
 import "./index.css";
 
-import MestoAPI from "../scripts/api/api.js";
+import Api from "../scripts/api/Api.js";
 
 import { FormValidator } from "../scripts/components/FormValidator.js";
 import Card from "../scripts/components/Card.js";
@@ -32,11 +32,11 @@ const addCardValidator = new FormValidator(selectors, addNewCardForm);
 const editProfileValidator = new FormValidator(selectors, editProfileForm);
 const updateAvatarValidator = new FormValidator(selectors, updateAvatarForm);
 
-const API = new MestoAPI(apiOptions);
+const api = new Api(apiOptions);
 
 const submitAddNewCard = (event, [name, link]) => {
     event.preventDefault();
-    return API.addNewCard(name, link).then((cardData) => {
+    return api.addNewCard(name, link).then((cardData) => {
         cardSection.addItem(cardData);
     }).catch((error) => {
         console.log(`addNewCardApiError: ${error}`);
@@ -45,7 +45,7 @@ const submitAddNewCard = (event, [name, link]) => {
 
 const submitEditProfileForm = (event, [name, profession]) => {
     event.preventDefault();
-    return API.updateProfile({name, profession}).then((userData) => {
+    return api.updateProfile({name, profession}).then((userData) => {
         userInfo.setUserInfo(userData);
     }).catch((error) => {
         console.log(`APIUpdateProfile: ${error}`);
@@ -71,7 +71,7 @@ const handleCardRemove = (cardId, removeCallBack) => {
 
 const submitDeleteCard = (event) => {
     event.preventDefault();
-    return API.deleteCard(cardToRemove).then(() => {
+    return api.deleteCard(cardToRemove).then(() => {
         cardRemoveCallback();
     }).catch((error) => {
         console.log(error);
@@ -80,7 +80,7 @@ const submitDeleteCard = (event) => {
 
 const submitUpdateAvatar = (event, [newUrl]) => {
     event.preventDefault();
-    return API.updateAvatar(newUrl).then(({avatar}) => {
+    return api.updateAvatar(newUrl).then(({avatar}) => {
         userAvatar.src = avatar;
     }).catch((error) => {
         console.log(error);
@@ -97,13 +97,13 @@ let userInternalId = "";
 
 const setLikeCallback = (cardId, isLiked, setLike) => {
     if (isLiked === true) {
-        API.unlike(cardId).then((data) => {
+        api.unlike(cardId).then((data) => {
             setLike(data.likes.length);
         }).catch((error) => {
             console.log(error);
         });
     } else {
-        API.like(cardId).then((data) => {
+        api.like(cardId).then((data) => {
             setLike(data.likes.length);
         }).catch((error) => {
             console.log(error);
@@ -118,7 +118,7 @@ const rendererFunction = (item) => {
 const userInfo = new UserInfo(".profile__name", ".profile__profession");
 
 const initUser = () => {
-    API.getUserInfo().then((userData) => {
+    api.getUserInfo().then((userData) => {
         userInfo.setUserInfo(userData);
         userAvatar.src = userData.avatar;
         userInternalId = userData._id;
@@ -132,7 +132,7 @@ const initUser = () => {
 };
 
 const getInitialCards = () => {
-    API.getInitialCards().then((cardsData) => {
+    api.getInitialCards().then((cardsData) => {
         console.log("cardsData", cardsData);
         cardSection.setItems(cardsData);
     }).catch((error) => {
