@@ -17,7 +17,6 @@ const addCardOverlay = document.querySelector("#modal-add-new-card");
 const addNewCardForm = addCardOverlay.querySelector(".edit-form");
 const addCardButton = document.querySelector(".profile__button_type_add-card");
 const avatarContainer = document.querySelector(".profile__avatar-container");
-const userAvatar = document.querySelector(".profile__avatar");
 
 const editProfileOverlay = document.querySelector("#modal-edit-profile");
 const editProfileForm = editProfileOverlay.querySelector(".edit-form");
@@ -36,8 +35,9 @@ const api = new Api(apiOptions);
 
 const submitAddNewCard = (event, [name, link]) => {
     event.preventDefault();
-    return api.addNewCard(name, link).then((cardData) => {
+    api.addNewCard(name, link).then((cardData) => {
         cardSection.addItem(cardData);
+        addCardModal.closeModal();
     }).catch((error) => {
         console.log(`addNewCardApiError: ${error}`);
     });
@@ -45,8 +45,9 @@ const submitAddNewCard = (event, [name, link]) => {
 
 const submitEditProfileForm = (event, [name, profession]) => {
     event.preventDefault();
-    return api.updateProfile({name, profession}).then((userData) => {
+    api.updateProfile({name, profession}).then((userData) => {
         userInfo.setUserInfo(userData);
+        editProfileModal.closeModal();
     }).catch((error) => {
         console.log(`APIUpdateProfile: ${error}`);
     });
@@ -71,8 +72,9 @@ const handleCardRemove = (cardId, removeCallBack) => {
 
 const submitDeleteCard = (event) => {
     event.preventDefault();
-    return api.deleteCard(cardToRemove).then(() => {
+    api.deleteCard(cardToRemove).then(() => {
         cardRemoveCallback();
+        confirmDeleteModal.closeModal();
     }).catch((error) => {
         console.log(error);
     });
@@ -80,8 +82,9 @@ const submitDeleteCard = (event) => {
 
 const submitUpdateAvatar = (event, [newUrl]) => {
     event.preventDefault();
-    return api.updateAvatar(newUrl).then(({avatar}) => {
-        userAvatar.src = avatar;
+    api.updateAvatar(newUrl).then(({avatar}) => {
+        userInfo.setUserAvatar(avatar);
+        updateAvatarModal.closeModal();
     }).catch((error) => {
         console.log(error);
     });
@@ -92,8 +95,6 @@ const addCardModal = new ModalWithForm("#modal-add-new-card", submitAddNewCard);
 const confirmDeleteModal = new ModalWithForm("#modal-confirm-delete", submitDeleteCard);
 const updateAvatarModal = new ModalWithForm("#modal-update-avatar", submitUpdateAvatar);
 const photoViewierModal = new PhotoViewierModal("#modal-photo-viewier");
-
-let userInternalId = "";
 
 const setLikeCallback = (cardId, isLiked, setLike) => {
     if (isLiked === true) {
@@ -112,32 +113,30 @@ const setLikeCallback = (cardId, isLiked, setLike) => {
 };
 
 const rendererFunction = (item) => {
-    return new Card(item, userInternalId, cardItemSelector, handleCardClick, handleCardRemove, setLikeCallback).createCard();
+    return new Card(item, userInfo.getUserId, cardItemSelector, handleCardClick, handleCardRemove, setLikeCallback).createCard();
 };
 
-const userInfo = new UserInfo(".profile__name", ".profile__profession");
+const userInfo = new UserInfo(".profile__name", ".profile__profession", ".profile__avatar");
 
 const initUser = () => {
     api.getUserInfo().then((userData) => {
         userInfo.setUserInfo(userData);
-        userAvatar.src = userData.avatar;
-        userInternalId = userData._id;
+        getInitialCards();
     }).catch((error) => {
         console.log(`getUserInfoError: ${error}`);
-        userInfo.setUserInfo({name: "Default", about: "User"});
-        userAvatar.attributes.src = "https://pictures.s3.yandex.net/frontend-developer/common/ava.jpg";
-    }).finally(() => {
-        getInitialCards();
+        userInfo.setUserInfo({
+            name: "Default",
+            about: "User",
+            avatar: "https://pictures.s3.yandex.net/frontend-developer/common/ava.jpg"},
+        );
     });
 };
 
 const getInitialCards = () => {
     api.getInitialCards().then((cardsData) => {
-        console.log("cardsData", cardsData);
         cardSection.setItems(cardsData);
     }).catch((error) => {
         console.log(`getInitialCardsError: ${error}`);
-        cardSection.setItems(initialCards);
     });
 };
 
