@@ -21,9 +21,7 @@ class ModalWithForm extends Modal {
         super.setEventListeners();
         this._form.addEventListener("submit", (event) => {
             this._button.textContent = "Сохранение...";
-            this._formSubmitCallback(event, this._getInputValues()).finally(() => {
-                this.closeModal();
-            });
+            this._formSubmitCallback(event, this._getInputValues());
         });
     }
 
@@ -31,7 +29,7 @@ class ModalWithForm extends Modal {
         super.openModal();
         this._button.textContent = this._buttonText;
     }
-    
+
     closeModal() {
         super.closeModal();
         this._form.reset();
