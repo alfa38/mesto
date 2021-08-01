@@ -4,7 +4,7 @@ import Api from "../scripts/api/Api.js";
 
 import { FormValidator } from "../scripts/components/FormValidator.js";
 import Card from "../scripts/components/Card.js";
-import { selectors, initialCards, cardsContainerSelector, apiOptions } from "../scripts/constants.js";
+import { selectors, cardsContainerSelector, apiOptions } from "../scripts/constants.js";
 
 import { cardItemSelector} from "../scripts/constants.js";
 
@@ -113,7 +113,7 @@ const setLikeCallback = (cardId, isLiked, setLike) => {
 };
 
 const rendererFunction = (item) => {
-    return new Card(item, userInfo.getUserId, cardItemSelector, handleCardClick, handleCardRemove, setLikeCallback).createCard();
+    return new Card(item, userInfo.getUserId(), cardItemSelector, handleCardClick, handleCardRemove, setLikeCallback).createCard();
 };
 
 const userInfo = new UserInfo(".profile__name", ".profile__profession", ".profile__avatar");
